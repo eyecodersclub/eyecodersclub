@@ -1,0 +1,283 @@
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #450099;
+  --black: #000000;
+  --white: #ffffff;
+  --gray: #efefef;
+  --gray-2: #757575;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100vh;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
+.container1 {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* BACKGROUND */
+
+.container1::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 300vw;
+  transform: translate(30%, 0);
+  background-image: linear-gradient(
+    -45deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-bottom-right-radius: max(50vw, 50vh);
+  border-top-left-radius: max(50vw, 50vh);
+}
+
+
+
+
+
+#myDiv {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  height: 100%;
+  animation: none;
+}
+
+#logo {
+  align-self: center;
+  width: 200px;
+  justify-content: center;
+  animation: blink 1s infinite; /* Blink effect */
+}
+
+
+/* Fade out animation */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Container hidden initially */
+.hidden {
+  display: none;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
+  /* Cursor style */
+  .cursor {
+    display: inline; /* Keep the cursor inline with the text */
+    font-weight: bold; /* Makes the cursor more noticeable, adjust as needed */
+    animation: blink 0.2s infinite step-end; /* Adjust blinking speed as needed */
+  }
+
+  /* Blinking animation */
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+
+
+  #we_are_text {
+    font-size: 9rem;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin-top: 10vh;
+    margin-left: 2vw;
+    position: absolute;
+    color: #ffffff;
+  }
+
+
+
+  #center{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Cursor style */
+  .cursor {
+    display: inline; /* Keep the cursor inline with the text */
+    font-weight: bold; /* Makes the cursor more noticeable, adjust as needed */
+    transform: scale(3, 1);
+    animation: blink 0.2s infinite step-end; /* Adjust blinking speed as needed */
+  }
+
+  /* Blinking animation */
+  @keyframes blink {
+    50% { opacity: 0; }
+    
+  }
+
+  .main_content{
+    background-color: #F7F9FA;
+    height: max-content;
+  }
+
+
+  .about-section {
+    background-color: rgb(44, 44, 44);
+    color: white;
+    margin-top: 1rem;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .about-section_content {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    margin-top: 1rem;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .about-section_content li{
+    text-align: start;
+  }
+  
+  .about-section_content p {
+    font-size: 1.7rem;
+  }
+
+@media only screen and (max-width: 600px) {
+  #we_are_text {
+    font-size: 3rem;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin-top: 10vh;
+    margin-left: 2vw;
+    position: absolute;
+    color: #ffffff;
+  }
+}
+
+.features {
+  padding: 4rem 0;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.feature {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 4px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+}
+
+.feature h3 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #3B8BBE;
+}
+
+.feature p {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+
+footer {
+  background-color: #3B8BBE;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.cta {
+  background-color: #3B8BBE;
+  color: #fff;
+  text-align: center;
+  padding: 6rem 0;
+}
+
+.cta h2 {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.btn1 {
+  display: inline-block;
+  background-color: #2ECC71;
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-size: 2rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(255, 241, 241, 0.1);
+}
+
+.btn1:hover {
+  background-color: #27ae60;
+  color: white;
+  text-decoration: none;
+}

@@ -1,0 +1,58 @@
+/* General Navbar Styles */
+.navbar {
+    position: fixed;
+    z-index: 1000;
+    scale: 0.97;
+    margin: 1rem;
+}
+
+#eye_coders_club {
+    width: 20rem;
+}
+
+.container-fluid {
+    display: flex;
+    justify-content: space-between; /* This aligns header to the left and navbar to the right */
+    align-items: center; /* This vertically centers the items */
+}
+
+#navbar {
+    display: flex; 
+    flex-direction: row;
+    margin-left: auto; /* Ensures the navbar is aligned to the right */
+}
+
+body .navbar {
+    position: fixed;
+    top: 0;
+    left: -10px;
+    width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .navbar {
+        position: fixed;
+        z-index: 1000;
+        scale: 0.9;
+        margin: 1rem;
+    }
+
+    #eye_coders_club {
+        width: 50rem;
+    }
+
+    .container-fluid {
+        display: flex;
+        justify-content: start; 
+    }
+
+    #navbar {
+        display: flex; 
+        flex-direction: row;
+        margin-left: 10px; /* Adjust for mobile if needed */
+    }
+
+    .navbar-header {
+        margin-right: 10px; /* Adjust for mobile if needed */
+    }
+} 

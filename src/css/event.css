@@ -1,0 +1,183 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+
+.event-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.events-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.event-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.event-image img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.event-content h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.event-description {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+#event-status {
+    font-size: 1.2rem;
+    color: #FF6B6B;
+    margin-bottom: 1rem;
+}
+
+#event-dates {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.countdown {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.countdown div {
+    background-color: #FF6B6B;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 23%;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f7f9;
+}
+.events-header {
+    background: linear-gradient(135deg, #3B8BBE, #450099);
+    color: white;
+    padding: 6rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+}
+.events-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('path_to_your_background_image.jpg') center/cover no-repeat;
+    opacity: 0.2;
+    z-index: 0;
+}
+.events-header .container {
+    position: relative;
+    z-index: 1;
+}
+.events-header h1 {
+    margin-top: 70px;
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+.events-header p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+.events-content {
+    padding: 5rem 0;
+}
+.event-category {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+.event-category h2 {
+    font-size: 2.5rem;
+    color: #3B8BBE;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+.event-category h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #2ECC71;
+}
+
+.cta-section {
+    background: linear-gradient(135deg, #2ECC71, #3B8BBE);
+    padding: 5rem 0;
+    text-align: center;
+    color: white;
+}
+.cta-section h2 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+.cta-section p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    opacity: 0.9;
+}
+.btn-cta { background-color: #450099;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-cta:hover {
+    background-color: #3B8BBE;
+}

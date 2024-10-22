@@ -56,7 +56,8 @@
       console.log(data); // Handle response here
       alert("Form successfully submitted!"); // Show success message to user
       document.getElementById("joinForm").reset(); // Optional: Reset the form
-      window.location.href = "index.html";
+      // Close the current window
+      window.close();
     })
     .catch(error => {
       console.error("Error:", error); // Handle error

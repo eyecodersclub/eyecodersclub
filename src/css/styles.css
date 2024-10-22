@@ -241,12 +241,12 @@ body::-webkit-scrollbar {
   font-size: 1.5rem;
 }
 
-footer {
+/* footer {
   background-color: #3B8BBE;
   color: #fff;
   text-align: center;
   padding: 1rem 0;
-}
+} */
 
 .cta {
   background-color: #3B8BBE;

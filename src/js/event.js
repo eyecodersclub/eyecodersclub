@@ -180,9 +180,11 @@ async function loadEvents() {
                 window.location.href=`./event/?eventId=${event["\"Event Id\""]}`;
             };
             
-            if(event["\"Show\""].toLowerCase()==='t'||event["\"Show\""].toLowerCase()==="true"){
-                // Add the event card to the grid
-                eventGrid.appendChild(eventCard);
+            if(event["\"Show\""]){
+                if((event["\"Show\""].toLowerCase()==='t'||event["\"Show\""].toLowerCase()==="true")&&(event["\"Title\""]!=="" && event["\"Description\""]!=="" && event["\"Image ID\""]!=="" && event["\"Start Date\""]!=="" && event["\"End Date\""]!=="" && event["\"Event Id\""]!=="" )){
+                    // Add the event card to the grid
+                    eventGrid.appendChild(eventCard);
+                }
             }
         });
         const loadingScreen = document.getElementById('loading-screen');

@@ -176,9 +176,10 @@ async function loadEvents() {
             eventCard.appendChild(eventDescription);
             eventCard.appendChild(eventDates);
             eventCard.appendChild(countdownContainer);
-
-            // Add the event card to the grid
-            eventGrid.appendChild(eventCard);
+            if(event["\"Show\""].toLowerCase()==='t'||event["\"Show\""].toLowerCase()==="true"){
+                // Add the event card to the grid
+                eventGrid.appendChild(eventCard);
+            }
         });
         const loadingScreen = document.getElementById('loading-screen');
         const content = document.getElementById('content');

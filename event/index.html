@@ -12,11 +12,24 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<link rel = "icon" href = "../src/images/favcon.png" type = "image/x-icon"> 
     <script type="module" src="./js/event.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.13/lottie.min.js"></script>
+
 </head>
 <body>
     <div id="we_are_text"></div>
     <div id="loading-screen">
-        <div class="spinner">   </div>
+        <div id="loading" style="width: 300px; height: 300px;"></div>
+        <script>
+            // Load Lottie animation
+            var animation = lottie.loadAnimation({
+                container: document.getElementById('loading'), // The container element
+                renderer: 'svg', // Renderer type: 'svg', 'canvas', or 'html'
+                loop: true, // Loop the animation
+                autoplay: true, // Automatically start the animation
+                path: './src/loading.json' // Path to the Lottie animation JSON file
+            });
+            animation.play();
+        </script>
     </div>
     <nav class="navbar navbar-inverse" >
 		<div class="container-fluid">

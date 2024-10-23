@@ -184,13 +184,11 @@ async function loadEvents() {
                 // Add the event card to the grid
                 eventGrid.appendChild(eventCard);
             }
-            console.log(event["\"Show\""]);
         });
         const loadingScreen = document.getElementById('loading-screen');
         const content = document.getElementById('content');
     
         loadingScreen.style.display = 'none'; // Hide loading screen
-        content.style.display = 'block'; // Show content
     } catch (error) {
         console.error('Error loading events:', error);
     }

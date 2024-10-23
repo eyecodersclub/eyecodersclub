@@ -34,7 +34,6 @@ if  (eventId) {
         const content = document.getElementById('content');
         
         loadingScreen.style.display = 'none'; // Hide loading screen
-        content.style.display = 'block'; // Show content
     } catch (error) {
         console.error('Error loading events:', error);
         document.getElementById("event_title").innerHTML=`event not exists`;
@@ -42,7 +41,6 @@ if  (eventId) {
         const content = document.getElementById('content');
         
         loadingScreen.style.display = 'none'; // Hide loading screen
-        content.style.display = 'block'; // Show content
     }
 }else{
     document.getElementById("event_title").innerHTML=`event not exists`;
@@ -50,5 +48,4 @@ if  (eventId) {
     const content = document.getElementById('content');
 
     loadingScreen.style.display = 'none'; // Hide loading screen
-    content.style.display = 'block'; // Show content
 }

@@ -188,7 +188,6 @@ async function loadEvents() {
             }
         });
         const loadingScreen = document.getElementById('loading-screen');
-        const content = document.getElementById('content');
     
         loadingScreen.style.display = 'none'; // Hide loading screen
     } catch (error) {

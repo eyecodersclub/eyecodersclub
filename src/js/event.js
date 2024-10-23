@@ -1,3 +1,5 @@
+import {fetchEvents} from '../api/event.js'
+
 // Function to format date and time in a human-readable way
 function formatDateTime(dateStr) {
     const date = new Date(dateStr);
@@ -7,8 +9,18 @@ function formatDateTime(dateStr) {
         day: 'numeric', 
         hour: '2-digit', 
         minute: '2-digit', 
-        hour12: true 
+        hour12: false 
     });
+}
+
+function formatDate(dateString) {
+    // Split the date string by spaces
+    let parts = dateString.split(' ');
+    
+    // Format the date: 'Oct 21, 2024 10:00:00'
+    let formattedDate = `${parts[1]} ${parts[2]}, ${parts[3]} ${parts[4]}`;
+    
+    return formattedDate;
 }
 
 function formatTime(dateStr) {
@@ -33,42 +45,46 @@ function createCountdown(timeLeft) {
 
 async function loadEvents() {
     try {
-        const response = await fetch('./src/data/event.json'); // Load the event JSON file
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-        const events = await response.json(); // Parse the response as JSON
-
+        // const response = await fetch('./src/data/event.json'); // Load the event JSON file
+        const response = await fetchEvents();
+        // if (!response.ok) {
+        //     throw new Error(`HTTP error! Status: ${response.status}`);
+        //   }
+        const events = response; // Parse the response as JSON
         const eventGrid = document.getElementById('eventGrid');
-
+        
         events.forEach(event => {
             // Create event card for each event
             const eventCard = document.createElement('div');
             eventCard.classList.add('event-card');
-
+            
             // Create and populate the event image
             const eventImage = document.createElement('div');
             eventImage.classList.add('event-image');
             const imageElement = document.createElement('img');
-            imageElement.src = `https://drive.google.com/thumbnail?id=${event.imageId}&sz=w1000`;
+            imageElement.src = `https://drive.google.com/thumbnail?id=${event["\"Image ID\""]}&sz=w1000`;
             eventImage.appendChild(imageElement);
-
+            
             // Create and populate the event title
             const eventTitle = document.createElement('h1');
             eventTitle.classList.add('event-title');
-            eventTitle.textContent = event.title;
-
+            eventTitle.textContent = event["\"Title\""];
+            
             // Create and populate the event description
             const eventDescription = document.createElement('p');
             eventDescription.classList.add('event-description');
-            eventDescription.textContent = event.description;
-
+            eventDescription.textContent = event["Description"];
+           // Using a regex to remove any GMT offset from the date strings
+           // Check if 'Start Date' exists and is a string before replacing
+           event["\"Start Date\""] = formatDate(event["\"Start Date\""]);
+           event["\"End Date\""] = formatDate(event["\"End Date\""]);
+           
             // Create and populate the event dates
             const eventDates = document.createElement('p');
             eventDates.classList.add('event-dates');
-            const eventStartDate = new Date(event.startDate);
-            const eventEndDate = new Date(event.endDate);
-            eventDates.textContent = `From: ${formatDateTime(event.startDate)} To: ${formatDateTime(event.endDate)}`;
+            const eventStartDate = new Date(event["\"Start Date\""]);
+            const eventEndDate = new Date(event["\"End Date\""]);
+            eventDates.textContent = `From: ${formatDateTime(event["\"Start Date\""])} To: ${formatDateTime(event["\"End Date\""])}`;
 
             // Create countdown container
             const countdownContainer = document.createElement('div');
@@ -165,6 +181,11 @@ async function loadEvents() {
             // Add the event card to the grid
             eventGrid.appendChild(eventCard);
         });
+        const loadingScreen = document.getElementById('loading-screen');
+        const content = document.getElementById('content');
+    
+        loadingScreen.style.display = 'none'; // Hide loading screen
+        content.style.display = 'block'; // Show content
     } catch (error) {
         console.error('Error loading events:', error);
     }

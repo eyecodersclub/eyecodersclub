@@ -176,6 +176,7 @@ async function loadEvents() {
             eventCard.appendChild(eventDescription);
             eventCard.appendChild(eventDates);
             eventCard.appendChild(countdownContainer);
+            
             if(event["\"Show\""].toLowerCase()==='t'||event["\"Show\""].toLowerCase()==="true"){
                 // Add the event card to the grid
                 eventGrid.appendChild(eventCard);

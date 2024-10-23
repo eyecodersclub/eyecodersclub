@@ -15,7 +15,7 @@ function formatDateTime(dateStr) {
 const eventId = new URLSearchParams(window.location.search).get('eventId');
 if  (eventId) {
     try {
-
+        let exitst=false;
         const events=await fetchEvents();
         events.forEach(event => {
             if(event["\"Event Id\""]===eventId){
@@ -24,18 +24,28 @@ if  (eventId) {
                 document.getElementById("event_image").src=`https://drive.google.com/thumbnail?id=${event["\"Image ID\""]}&sz=w1000`;
                 document.getElementById("event_date").textContent = `From: ${formatDateTime(event["\"Start Date\""])} To: ${formatDateTime(event["\"End Date\""])}`;
     
-                const loadingScreen = document.getElementById('loading-screen');
-                const content = document.getElementById('content');
-                
-                loadingScreen.style.display = 'none'; // Hide loading screen
-                content.style.display = 'block'; // Show content
+                exitst=true;
             }
         });
+        if(!exitst){
+            document.getElementById("event_title").innerHTML=`event not exists`;
+        }
+        const loadingScreen = document.getElementById('loading-screen');
+        const content = document.getElementById('content');
+        
+        loadingScreen.style.display = 'none'; // Hide loading screen
+        content.style.display = 'block'; // Show content
     } catch (error) {
         console.error('Error loading events:', error);
+        document.getElementById("event_title").innerHTML=`event not exists`;
+        const loadingScreen = document.getElementById('loading-screen');
+        const content = document.getElementById('content');
+        
+        loadingScreen.style.display = 'none'; // Hide loading screen
+        content.style.display = 'block'; // Show content
     }
 }else{
-    document.getElementById("event_title").innerHTML=`Event Not Exitst`;
+    document.getElementById("event_title").innerHTML=`event not exists`;
     const loadingScreen = document.getElementById('loading-screen');
     const content = document.getElementById('content');
 

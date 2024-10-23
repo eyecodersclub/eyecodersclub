@@ -45,7 +45,6 @@ function createCountdown(timeLeft) {
 
 async function loadEvents() {
     try {
-        // const response = await fetch('./src/data/event.json'); // Load the event JSON file
         const response = await fetchEvents();
         // if (!response.ok) {
         //     throw new Error(`HTTP error! Status: ${response.status}`);

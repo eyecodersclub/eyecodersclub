@@ -10,10 +10,10 @@ export async function fetchEvents() {
         // Convert CSV to JSON
         // csvText=csvText.replaceAll(" GMT+0530 (India Standard Time)"," ");
         const json = csvToJson(csvText);
-        // console.log(json);
+        console.log("featch data successfully");
         return json
     } catch (error) {
-        console.error('Error fetching or processing the CSV:', error);
+        console.error('Error fetching or processing the on data:', error);
     }
 }
 

@@ -1,5 +1,6 @@
 import {csvToJson} from './csvToJson.js';
-const SHEET_URL = `https://script.google.com/macros/s/AKfycbxfpoCsVH6lGCXRIRDvvtAteL367yMLeQDzfyfADD9uFNREVFmiskhebD4KcFAS9TtsbQ/exec`;
+import { team } from '../js/config.js';
+const SHEET_URL = `${team.BASE_URL}/${team.API_KEY}/exec`;
 
 export async function fetchAndLoadTeamMembers(sheetName="24-25") {
     try {

@@ -1,6 +1,7 @@
+import { joinClub } from "../js/config";
 export async function sendRequestForJoinClub(jsonData) {
         // Send data to Google Apps Script via POST request
-        fetch("https://script.google.com/macros/s/AKfycbyRSGNvAe31g42DE17FsKk-GvLXZpW0hqljKe9-ZRfOe-JlJN_6NwCdEpmQOs4WsDPl/exec", {
+        fetch(`${joinClub.BASE_URL}/${joinClub.API_KEY}/exec`, {
             method: "POST",
             mode: "cors", // Cross-origin request (if needed)
             headers: {

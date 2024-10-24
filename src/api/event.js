@@ -1,6 +1,7 @@
 // Replace with your Google Sheet ID
 import {csvToJson} from './csvToJson.js';
-const SHEET_URL = `https://script.google.com/macros/s/AKfycbwhacINqTptjo9YOSQWcY-sv31wn_d_7L-Qz_uxywex673xw3lG3RyF_A15t_AGPR-5iw/exec`;
+import { event } from '../js/config.js';
+const SHEET_URL = `${event.BASE_URL}/${event.API_KEY}/exec`;
 
 export async function fetchEvents() {
     try {

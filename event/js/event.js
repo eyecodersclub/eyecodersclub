@@ -8,7 +8,7 @@ function formatDateTime(dateStr) {
         day: 'numeric', 
         hour: '2-digit', 
         minute: '2-digit', 
-        hour12: false 
+        hour12: true 
     });
 }
 
@@ -23,7 +23,6 @@ if  (eventId) {
                 document.getElementById("event_description").innerHTML=event["\"Description\""];
                 document.getElementById("event_image").src=`https://drive.google.com/thumbnail?id=${event["\"Image ID\""]}&sz=w1000`;
                 document.getElementById("event_date").textContent = `From: ${formatDateTime(event["\"Start Date\""])} To: ${formatDateTime(event["\"End Date\""])}`;
-    
                 exitst=true;
             }
         });

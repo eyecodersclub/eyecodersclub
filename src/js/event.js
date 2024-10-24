@@ -20,7 +20,7 @@ function formatDate(dateString) {
     // Format the date: 'Oct 21, 2024 10:00:00'
     let formattedDate = `${parts[1]} ${parts[2]}, ${parts[3]} ${parts[4]}`;
     
-    return formattedDate;
+    return formattedDate;   
 }
 
 function formatTime(dateStr) {
@@ -28,20 +28,40 @@ function formatTime(dateStr) {
     return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
 }
 
-// Function to calculate remaining time and return formatted countdown data
-function createCountdown(timeLeft) {
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-    return {
-        days: days < 10 ? '0' + days : days,
-        hours: hours < 10 ? '0' + hours : hours,
-        minutes: minutes < 10 ? '0' + minutes : minutes,
-        seconds: seconds < 10 ? '0' + seconds : seconds
-    };
+function loadImage(imgElement) {
+    return new Promise((resolve, reject) => {
+        imgElement.onload = () => {
+            resolve();
+        };
+        imgElement.onerror = () => {
+            reject();
+        };
+    });
 }
+
+
+// Function to dynamically load the Lottie library
+function loadLottieLibrary(callback) {
+    const script = document.createElement('script');
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js";
+    script.onload = callback; // Call the callback once the script is loaded
+    document.head.appendChild(script);
+}
+
+// Function to load the Lottie animation
+const loadAnimationAfterContainer = (uniqueId) => {
+    const animationContainer = document.getElementById(`animation-container_${uniqueId}`);
+    if (animationContainer) { // Check if the container exists
+        lottie.loadAnimation({
+            container: animationContainer,
+            path: './src/image.json',
+            loop: true,
+            autoplay: true,
+        });
+    } else {
+        console.error(`Animation container with ID animation-container_${uniqueId} not found.`);
+    }
+};
 
 async function loadEvents() {
     try {
@@ -53,16 +73,32 @@ async function loadEvents() {
         const eventGrid = document.getElementById('eventGrid');
         
         events.forEach(event => {
+
             // Create event card for each event
             const eventCard = document.createElement('div');
             eventCard.classList.add('event-card');
             
             // Create and populate the event image
             const eventImage = document.createElement('div');
+            const container = document.createElement('div');
             eventImage.classList.add('event-image');
+            eventImage.id=`${event["\"Event Id\""]}`;
+            container.id=`animation-container_${event["\"Event Id\""]}`;
+            eventImage.appendChild(container);
             const imageElement = document.createElement('img');
+
             imageElement.src = `https://drive.google.com/thumbnail?id=${event["\"Image ID\""]}&sz=w1000`;
-            eventImage.appendChild(imageElement);
+                // Load Lottie animation
+            loadLottieLibrary(() => loadAnimationAfterContainer(event["\"Event Id\""]));
+            loadImage(imageElement)
+            .then(()=>{
+                container.remove();
+                container.style.display='none';
+                eventImage.appendChild(imageElement);
+            })
+            .catch(()=>{
+                
+            });
             
             // Create and populate the event title
             const eventTitle = document.createElement('h1');

@@ -12,6 +12,18 @@ function formatDateTime(dateStr) {
     });
 }
 
+function loadImage(imgElement) {
+    return new Promise((resolve, reject) => {
+        imgElement.onload = () => {
+            resolve();
+        };
+        imgElement.onerror = () => {
+            reject();
+        };
+    });
+}
+
+
 const eventId = new URLSearchParams(window.location.search).get('eventId');
 if  (eventId) {
     try {
@@ -21,7 +33,19 @@ if  (eventId) {
             if(event["\"Event Id\""]===eventId){
                 document.getElementById("event_title").innerHTML=event["\"Title\""];
                 document.getElementById("event_description").innerHTML=event["\"Description\""];
-                document.getElementById("event_image").src=`https://drive.google.com/thumbnail?id=${event["\"Image ID\""]}&sz=w1000`;
+                const imageElement=document.getElementById("event_image");
+                imageElement.src=`https://drive.google.com/thumbnail?id=${event["\"Image ID\""]}&sz=w1000`;
+                imageElement.style.display='none';
+                loadImage(imageElement)
+                .then(()=>{
+                    const container=document.getElementById('animation-container');
+                    container.remove();
+                    container.style.display='none';
+                    imageElement.style.display='block';
+                })
+                .catch(()=>{
+                    
+                });
                 document.getElementById("event_date").textContent = `From: ${formatDateTime(event["\"Start Date\""])} To: ${formatDateTime(event["\"End Date\""])}`;
                 exitst=true;
             }

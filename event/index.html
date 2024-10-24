@@ -58,6 +58,18 @@
             <section class="event-category" style="width: 500px; display: flex;justify-content: center;align-items: center; flex-direction: column; background-color: #d7effa;"">
                 <h2 id="event_title">Event</h2>
                 <div class="event-image">
+                    <div id="animation-container" style="width: 400px; height: 400px;"></div>
+                    <script>
+                        // Load Lottie animation
+                        var animation = lottie.loadAnimation({
+                            container: document.getElementById('animation-container'), // The container element
+                            renderer: 'svg', // Renderer type: 'svg', 'canvas', or 'html'
+                            loop: true, // Loop the animation
+                            autoplay: true, // Automatically start the animation
+                            path: '../src/image.json' // Path to the Lottie animation JSON file
+                        });
+                        animation.play();
+                    </script>
                     <img id="event_image" style="width: 400px; height: 400px;"></img>
                 </div>
                 <h3 id="event_date"></h3>

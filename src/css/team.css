@@ -68,6 +68,14 @@ body {
     margin: 0 auto 20px;
     overflow: hidden;
     border: 4px solid #4a90e2;
+    background-color: #1a1a1a;
+    color: #cfd3d9;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .member-image img {
@@ -75,6 +83,11 @@ body {
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+    display: block;
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+
 }
 
 .team-member:hover .member-image img {

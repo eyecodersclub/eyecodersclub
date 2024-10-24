@@ -14,7 +14,10 @@ function createTeamMember(member){
             </div>
             <h3 class="member-name">${member["\"name\""]}</h3>
             <p class="member-role">${member["\"role\""]}</p>
-            <p class="member-bio">${member["\"bio\""]}</p>
+            ${member["\"bio\""] ? `
+          <svg icon-name="quote" width="24" height="24" stroke="red" stroke-width="2" fill="none" style="center"></svg>
+          <p class="member-bio">"${member["\"bio\""]}"</p>`:``}
+            
             <div class="social-links">
                 ${member["\"linkedin\""] ?
         `<a href="${member["\"linkedin\""]}" target="_blank">
@@ -52,6 +55,7 @@ function loadTeamMembers(teamData, id) {
     // Create an array to hold promises for loading images
     const loadImagePromises = teamData.map(member => {
         const memberCard = createTeamMember(member);
+        loadLucideLibrary(addQuete);
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = memberCard; // Temporarily hold the HTML string
 
@@ -144,3 +148,16 @@ loadTeamMembers(json_24_25,"team_24-25");
 // Hide loading screen
 const loadingScreen = document.getElementById('loading-screen');
 loadingScreen.style.display = 'none'; 
+
+  
+  
+function loadLucideLibrary(callback) {
+      const script = document.createElement('script');
+      script.src = "https://unpkg.com/lucide@latest";
+      script.onload = callback; // Call the callback once the script is loaded
+      document.head.appendChild(script);
+}
+    
+function addQuete(){
+    lucide.createIcons();
+}

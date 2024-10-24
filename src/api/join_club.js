@@ -1,4 +1,4 @@
-import { joinClub } from "../js/config";
+import { joinClub } from "../js/config.js";
 export async function sendRequestForJoinClub(jsonData) {
         // Send data to Google Apps Script via POST request
         fetch(`${joinClub.BASE_URL}/${joinClub.API_KEY}/exec`, {
@@ -20,6 +20,6 @@ export async function sendRequestForJoinClub(jsonData) {
           .catch(error => {
             console.error("Error:", error); // Handle error
             alert("An error occurred while submitting the form. Please try again.");
+            window.close();
           });
-        });
 }

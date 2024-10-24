@@ -5,11 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eye Coders Club - Join Form</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./src/css/event.css" rel="stylesheet">
   <link href="./src/css/join_club.css" rel="stylesheet">
+  <link href="./src/css/styles.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.13/lottie.min.js"></script>
 
 </head>
 <body>
-
+    <div id="loading-screen">
+        <div id="loading" style="width: 300px; height: 300px;"></div>
+        <script>
+            // Load Lottie animation
+            var animation = lottie.loadAnimation({
+                container: document.getElementById('loading'), // The container element
+                renderer: 'svg', // Renderer type: 'svg', 'canvas', or 'html'
+                loop: true, // Loop the animation
+                autoplay: true, // Automatically start the animation
+                path: './src/loading.json' // Path to the Lottie animation JSON file
+            });
+            animation.play();
+        </script>
+    </div>
     <div class="container form-container">
         <h2 class="form-title">Join Eye Coders Club</h2>
         <p>The Programming Club, brought to you by the Department of Computer Science & Engineering at CSPIT, CHARUSAT, is more than just a club—it's an opportunity to dive into the world of Competitive Programming and reap its many benefits. Our goal is to inspire and prepare our student community for the challenges ahead.
@@ -32,7 +48,7 @@
             
                 <div class="mb-3">
                     <label for="email" class="form-label">Collage Email ID</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your  email" required>
                 </div>
                 
                 <div class="mb-3">
@@ -67,11 +83,44 @@
                 </div>
             
                 <div class="mb-3">
+                    <label for="membership" class="form-label">Which role fascinates you when you saw the prospect of becoming a part of this club?</label>
+                    <select class="form-select" id="membership" name="membership" required>
+                        <option value="Core Team">Core Team</option>
+                        <option value="Member">Member</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="role" class="form-label">Which Sub-Division of this club would fall perfectly in your arc and suit your skillset?</label>
+                    <select class="form-select" id="role" name="role" required>
+                        <option value="Technical Representative">Technical Representative</option>
+                        <option value="Graphics Desinger">Graphics Desinger</option>
+                        <option value="Social Media Manager">Social Media Manager</option>
+                        <option value="Event Manager">Event Manager</option>
+                        <option value="Only Member">Only Member</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
                     <label for="part_contest" class="form-label">Do you actively take part in any coding contests?</label>
                     <select class="form-select" id="part_contest" name="part_contest" required>
                         <option value="no">No</option>
                         <option value="yes">Yes</option>
                     </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="part_club" class="form-label">Are you a part of any other Club or Technical Body?</label>
+                    <select class="form-select" id="part_club" name="part_club" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+
+                <div id="dynamicSection"></div>
+
+                <div class="text-center">
+                    <button type="button" id="addClubRole" class="btn btn-custom" style="display: none;">Add More Club</button>
                 </div>
             
                 <div class="mb-3">

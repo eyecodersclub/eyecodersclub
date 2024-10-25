@@ -17,7 +17,7 @@ jobs:
         run: mkdir build
 
       - name: Copy files to build directory
-        run: cp -r * build/  # Copy all files to the build directory, adjust if necessary
+        run: cp -r * /  # Copy all files to the build directory, adjust if necessary
 
       - name: Inject API key into JavaScript
         run: |

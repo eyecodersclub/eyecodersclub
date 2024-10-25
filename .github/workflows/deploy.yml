@@ -31,3 +31,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build  # Directory to publish
+
+      - name: Print link to config.js
+        run: |
+          echo "Link to config.js: https://eyecodersclub.github.io/$(basename $(dirname $(dirname $(pwd))))/src/js/config.js"

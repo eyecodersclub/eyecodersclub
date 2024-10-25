@@ -34,4 +34,8 @@ jobs:
 
       - name: Print link to config.js
         run: |
-          echo "Link to config.js: https://eyecodersclub.github.io/$(basename $(dirname $(dirname $(pwd))))/src/js/config.js"
+          echo "Link to config.js: https://eyecodersclub.github.io/$(basename$(dirname$(dirname$(pwd))))/src/js/config.js"
+
+      - name: List build directory contents
+        run: ls -R build  # List all files in the build directory
+

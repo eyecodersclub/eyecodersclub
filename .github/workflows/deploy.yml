@@ -19,9 +19,16 @@ jobs:
       - name: Copy files to build directory
         run: rsync -av --exclude 'build' ./ build/  # Copy all files to the build directory, adjust if necessary
 
-      - name: Inject API key into JavaScript
-        run: |
-          echo "export const joinClub = {\nBASE_URL: \"https://script.google.com/macros/s\",\nAPI_KEY: \"$${{secrets.JOINCLUB}}\",\n};\nexport const team = {\nBASE_URL: \"https://script.google.com/macros/s\",\nAPI_KEY: \"$${{secrets.TEAM}}\",\n};\nexport const event = {\nBASE_URL: \"https://script.google.com/macros/s\",\nAPI_KEY: \"$${{secrets.EVENT}}\",\n};" > build/src/js/config.js  # Create config.js with the API key
+      - name: Create a build directory
+      run: mkdir -p build/src/js
+
+    - name: Inject API key into JavaScript
+      run: |
+        echo "export const joinClub = {\nBASE_URL: \"https://script.google.com/macros/s\",\nAPI_KEY: \"$${{secrets.JOINCLUB}}\",\n};\nexport const team = {\nBASE_URL: \"https://script.google.com/macros/s\",\nAPI_KEY: \"$${{secrets.TEAM}}\",\n};\nexport const event = {\nBASE_URL: \"https://script.google.com/macros/s\",\nAPI_KEY: \"$${{secrets.EVENT}}\",\n};" > build/src/js/config.js  # Create config.js with the API key
+
+    - name: Verify config.js exists
+      run: ls -al build/src/js/config.js  # Check if config.js is created
+
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

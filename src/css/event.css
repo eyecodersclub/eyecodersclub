@@ -181,3 +181,92 @@ body {
 .btn-cta:hover {
     background-color: #3B8BBE;
 }
+
+
+/* Dark theme styles for events */
+.event-card {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    border: 1px solid #3B8BBE;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #ffffff;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(59, 139, 190, 0.3);
+}
+
+.event-title {
+    color: #4a90e2;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.event-description {
+    color: #cccccc;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.event-dates {
+    color: #888888;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.countdown div {
+    background-color: #3B8BBE;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 23%;
+    text-align: center;
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.events-header {
+    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+    color: white;
+    padding: 6rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #3B8BBE;
+}
+
+.events-header h1 {
+    color: #4a90e2;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.events-header p {
+    color: #cccccc;
+}
+
+.event-category {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.btn-cta {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-cta:hover {
+    background-color: #357abd;
+    transform: translateY(-2px);
+}

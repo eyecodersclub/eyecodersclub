@@ -11,7 +11,6 @@ export async function fetchAndLoadTeamMembers(sheetName="24-25") {
         // }
         const csvText = await response.text();
         const teamData = csvToJson(csvText);
-        console.log(csvText);
         return teamData;
     } catch (error) {
         console.error('Error loading team members:', error);

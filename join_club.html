@@ -28,105 +28,111 @@
     </div>
     <div class="container form-container">
         <h2 class="form-title">Join Eye Coders Club</h2>
-        <p>The Programming Club, brought to you by the Department of Computer Science & Engineering at CSPIT, CHARUSAT, is more than just a club—it's an opportunity to dive into the world of Competitive Programming and reap its many benefits. Our goal is to inspire and prepare our student community for the challenges ahead.
-
-            Exciting events such as seminars and regular coding contests are on the horizon, promising fun and learning for all involved.
-            
-            Are you ready to join our vibrant community? Simply fill out the registration form below to get started.
-            
-            We eagerly anticipate your participation!</p>
-            <form id="joinForm">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Student Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
-                </div>
+        <div class="form-description">
+            <p>Welcome to the Eye Coders Club registration! Join our vibrant community of programmers and developers. Through this form, you'll be taking your first step towards an exciting journey of learning, collaboration, and growth in the world of programming.</p>
+        </div>
+        <form id="joinForm">
+                <div class="form-section">
+                    <h3 class="section-title">Personal Information</h3>
+                    <!-- Personal info fields here -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Student Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="id" class="form-label">Student ID</label>
+                        <input type="text" class="form-control" id="id" name="id" placeholder="Enter your student ID" required>
+                    </div>
                 
-                <div class="mb-3">
-                    <label for="id" class="form-label">Student ID</label>
-                    <input type="text" class="form-control" id="id" name="id" placeholder="Enter your student ID" required>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Collage Email ID</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your  email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact" class="form-label">Contact Number (Whatsapp Preferable)</label>
+                        <input type="tel" class="form-control" id="contact" name="contact" placeholder="Enter your contact number" required>
+                    </div>
                 </div>
-            
-                <div class="mb-3">
-                    <label for="email" class="form-label">Collage Email ID</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your  email" required>
-                </div>
+                <div class="form-section">
+                    <h3 class="section-title">Academic Information</h3>
+                    <!-- Academic info fields here -->
+                    <div class="mb-3">
+                        <label for="institute" class="form-label">Institute</label>
+                        <select class="form-select" id="institute" name="institute" required>
+                            <option value="">Select your institute</option>
+                            <option value="cspit">CSPIT</option>
+                            <option value="depstar">DEPSTAR</option>
+                        </select>
+                    </div>
                 
-                <div class="mb-3">
-                    <label for="institute" class="form-label">Institute</label>
-                    <select class="form-select" id="institute" name="institute" required>
-                        <option value="">Select your institute</option>
-                        <option value="cspit">CSPIT</option>
-                        <option value="depstar">DEPSTAR</option>
-                    </select>
+                    <div class="mb-3">
+                        <label for="department" class="form-label">Department</label>
+                        <select class="form-select" id="department" name="department" required>
+                            <option value="">Select your department</option>
+                        </select>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="semester" class="form-label">Semester</label>
+                        <select class="form-select" id="semester" name="semester" required>
+                            <option value="">Select your semester</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <h3 class="section-title">Club Preferences</h3>
+                    <!-- Club preference fields here -->
+                    <div class="mb-3">
+                        <label for="membership" class="form-label">Which role fascinates you when you saw the prospect of becoming a part of this club?</label>
+                        <select class="form-select" id="membership" name="membership" required>
+                            <option value="Core Team">Core Team</option>
+                            <option value="Member">Member</option>
+                        </select>
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Which Sub-Division of this club would fall perfectly in your arc and suit your skillset?</label>
+                        <select class="form-select" id="role" name="role" required>
+                            <option value="Technical Representative">Technical Representative</option>
+                            <option value="Graphics Desinger">Graphics Desinger</option>
+                            <option value="Social Media Manager">Social Media Manager</option>
+                            <option value="Event Manager">Event Manager</option>
+                            <option value="Only Member">Only Member</option>
+                        </select>
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="part_contest" class="form-label">Do you actively take part in any coding contests?</label>
+                        <select class="form-select" id="part_contest" name="part_contest" required>
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="part_club" class="form-label">Are you a part of any other Club or Technical Body?</label>
+                        <select class="form-select" id="part_club" name="part_club" required>
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+    
+                    <div id="dynamicSection"></div>
+    
+                    <div class="text-center">
+                        <button type="button" id="addClubRole" class="btn btn-custom" style="display: none;">Add More Club</button>
+                    </div>
                 </div>
             
-                <div class="mb-3">
-                    <label for="department" class="form-label">Department</label>
-                    <select class="form-select" id="department" name="department" required>
-                        <option value="">Select your department</option>
-                    </select>
-                </div>
-            
-                <div class="mb-3">
-                    <label for="semester" class="form-label">Semester</label>
-                    <select class="form-select" id="semester" name="semester" required>
-                        <option value="">Select your semester</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                    </select>
-                </div>
-            
-                <div class="mb-3">
-                    <label for="membership" class="form-label">Which role fascinates you when you saw the prospect of becoming a part of this club?</label>
-                    <select class="form-select" id="membership" name="membership" required>
-                        <option value="Core Team">Core Team</option>
-                        <option value="Member">Member</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="role" class="form-label">Which Sub-Division of this club would fall perfectly in your arc and suit your skillset?</label>
-                    <select class="form-select" id="role" name="role" required>
-                        <option value="Technical Representative">Technical Representative</option>
-                        <option value="Graphics Desinger">Graphics Desinger</option>
-                        <option value="Social Media Manager">Social Media Manager</option>
-                        <option value="Event Manager">Event Manager</option>
-                        <option value="Only Member">Only Member</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="part_contest" class="form-label">Do you actively take part in any coding contests?</label>
-                    <select class="form-select" id="part_contest" name="part_contest" required>
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="part_club" class="form-label">Are you a part of any other Club or Technical Body?</label>
-                    <select class="form-select" id="part_club" name="part_club" required>
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
-                    </select>
-                </div>
-
-                <div id="dynamicSection"></div>
-
-                <div class="text-center">
-                    <button type="button" id="addClubRole" class="btn btn-custom" style="display: none;">Add More Club</button>
-                </div>
-            
-                <div class="mb-3">
-                    <label for="contact" class="form-label">Contact Number (Whatsapp Preferable)</label>
-                    <input type="tel" class="form-control" id="contact" name="contact" placeholder="Enter your contact number" required>
-                </div>
             
                 <div class="text-center">
                     <button type="submit" class="btn btn-custom">Submit</button>

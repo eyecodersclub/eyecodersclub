@@ -145,6 +145,9 @@ body {
 .form-control, .form-select, .btn-custom {
   animation: fadeInUp 0.5s ease-out;
 }
+.form-select option{
+  background-color: black ;
+}
 
 @keyframes fadeInUp {
   from {

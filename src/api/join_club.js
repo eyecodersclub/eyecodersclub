@@ -16,16 +16,16 @@ export async function sendRequestForJoinClub(jsonData) {
               alert("Form successfully submitted!"); // Show success message to user
               document.getElementById("joinForm").reset(); // Optional: Reset the form
               // Close the current window
-              window.close();
+              window.location.href = "./index.html"; 
             }else{
               console.error(data); // Handle error
               alert("An error occurred while submitting the form. Please try again.");
-              window.close();
+              window.location.href = "./index.html"; 
             }
           })
           .catch(error => {
             console.error("Error:", error); // Handle error
             alert("An error occurred while submitting the form. Please try again.");
-            window.close();
+            window.location.href = "./index.html"; 
           });
 }

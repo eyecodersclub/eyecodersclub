@@ -1,7 +1,7 @@
-import { joinClub } from "../js/config.js";
+import { BASE_URL, API_KEY} from "../js/config.js";
 export async function sendRequestForJoinClub(jsonData) {
         // Send data to Google Apps Script via POST request
-        fetch(`${joinClub.BASE_URL}/${joinClub.API_KEY}/exec`, {
+        fetch(`${BASE_URL}/${API_KEY}/exec?action=joinClub`, {
             method: "POST",
             mode: "cors", // Cross-origin request (if needed)
             headers: {
@@ -12,10 +12,16 @@ export async function sendRequestForJoinClub(jsonData) {
           .then(response => response.text())
           .then(data => {
             console.log(data); // Handle response here
-            alert("Form successfully submitted!"); // Show success message to user
-            document.getElementById("joinForm").reset(); // Optional: Reset the form
-            // Close the current window
-            window.close();
+            if (data === "Data successfully received"){
+              alert("Form successfully submitted!"); // Show success message to user
+              document.getElementById("joinForm").reset(); // Optional: Reset the form
+              // Close the current window
+              window.close();
+            }else{
+              console.error(data); // Handle error
+              alert("An error occurred while submitting the form. Please try again.");
+              window.close();
+            }
           })
           .catch(error => {
             console.error("Error:", error); // Handle error

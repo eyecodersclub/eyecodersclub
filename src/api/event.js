@@ -1,7 +1,7 @@
 // Replace with your Google Sheet ID
 import {csvToJson} from './csvToJson.js';
-import { event } from '../js/config.js';
-const SHEET_URL = `${event.BASE_URL}/${event.API_KEY}/exec`;
+import { BASE_URL, API_KEY} from "../js/config.js";
+const SHEET_URL = `${BASE_URL}/${API_KEY}/exec?action=getEventData`;
 
 export async function fetchEvents() {
     try {

@@ -1,0 +1,26 @@
+name: Create Config
+
+on:
+  push:
+    branches:
+      - main  # Adjust this based on your default branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Create config.js
+        run: |
+          echo "export const BASE_URL = '${{ secrets.BASE_URL }}';" > ./src/js/config.js
+          echo "export const API_KEY = '${{ secrets.API_key }}';" >> ./src/js/config.js
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "lumbhanishashan1510@gmail.com"
+          git config --local user.name "Shashan Lumbhani"
+          git add ./src/js/config.js
+          git commit -m "Update config.js with secrets" || echo "No changes to commit"
+          git push

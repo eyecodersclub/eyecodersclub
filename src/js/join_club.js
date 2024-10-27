@@ -8,7 +8,6 @@
       const options = ['Select your department','Computer Science And Engineering','Computer Engineering', 'Information Technology'];
       options.forEach(option => {
           let opt = document.createElement('option');
-          opt.value = option.toLowerCase().replace(' ', '-');
           opt.text = option;
           department.appendChild(opt);
         });
@@ -16,7 +15,6 @@
     const options = ['Select your department','Computer Science And Engineering','Computer Engineering', 'Information Technology'];
       options.forEach(option => {
         let opt = document.createElement('option');
-        // opt.value = option.toLowerCase().replace(' ', '-');
         opt.text = option;
         department.appendChild(opt);
       });
@@ -24,7 +22,6 @@
         const options = ['Select your department'];
           options.forEach(option => {
             let opt = document.createElement('option');
-            // opt.value = option.toLowerCase().replace(' ', '-');
             opt.text = option;
             department.appendChild(opt);
           });

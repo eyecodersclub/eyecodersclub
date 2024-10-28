@@ -43,15 +43,18 @@
                     <div class="mb-3">
                         <label for="id" class="form-label">Student ID</label>
                         <input type="text" class="form-control" id="id" name="id" placeholder="Enter your student ID" required>
+                        <small id="idError" style="color: red; display: none;">Invalid Collage Id</small>
                     </div>
                 
                     <div class="mb-3">
                         <label for="email" class="form-label">Collage Email ID</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your  email" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your  email" required autocomplete="off">
+                        <small id="emailError" style="color: red; display: none;"></small>
                     </div>
                     <div class="mb-3">
                         <label for="contact" class="form-label">Contact Number (Whatsapp Preferable)</label>
                         <input type="tel" class="form-control" id="contact" name="contact" placeholder="Enter your contact number" required>
+                        <small id="contactError" style="color: red; display: none;">Please enter a valid 10-digit mobile number.</small>
                     </div>
                 </div>
                 <div class="form-section">
@@ -60,16 +63,16 @@
                     <div class="mb-3">
                         <label for="institute" class="form-label">Institute</label>
                         <select class="form-select" id="institute" name="institute" required>
-                            <option value="">Select your institute</option>
-                            <option value="cspit">CSPIT</option>
-                            <option value="depstar">DEPSTAR</option>
+                            <option value="">SELECT YOUR INSTITUTE</option>
+                            <option value="CSPIT">CSPIT</option>
+                            <option value="DEPSTAR">DEPSTAR</option>
                         </select>
                     </div>
                 
                     <div class="mb-3">
                         <label for="department" class="form-label">Department</label>
                         <select class="form-select" id="department" name="department" required>
-                            <option value="">Select your department</option>
+                            <option value="">SELECT YOUR DEPARTMENT</option>
                         </select>
                     </div>
                 
@@ -94,6 +97,7 @@
                     <div class="mb-3">
                         <label for="membership" class="form-label">Which role fascinates you when you saw the prospect of becoming a part of this club?</label>
                         <select class="form-select" id="membership" name="membership" required>
+                            <option value="">Select Which Roll You Preferred</option>
                             <option value="Core Team">Core Team</option>
                             <option value="Member">Member</option>
                         </select>
@@ -102,6 +106,7 @@
                     <div class="mb-3">
                         <label for="role" class="form-label">Which Sub-Division of this club would fall perfectly in your arc and suit your skillset?</label>
                         <select class="form-select" id="role" name="role" required>
+                            <option value="">Select Your Interest</option>
                             <option value="Technical Representative">Technical Representative</option>
                             <option value="Graphics Desinger">Graphics Desinger</option>
                             <option value="Social Media Manager">Social Media Manager</option>

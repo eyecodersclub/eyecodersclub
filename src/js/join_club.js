@@ -1,25 +1,180 @@
- import {sendRequestForJoinClub} from '../api/join_club.js';
+import {sendRequestForJoinClub} from '../api/join_club.js';
+
+const departments = ['cs', 'ce', 'it', 'dcs', 'dce', 'dit'];
+
+
+function extractEmailParts(email) {
+  // Define the regex pattern for validation
+  const emailPattern = new RegExp(`^(d?\\d{2})([a-zA-Z]+)(\\d{3})@charusat\\.edu\\.in$`, 'i');
+  const match = email.match(emailPattern); // Match against the pattern
+
+  if (match) {
+      // Extract parts: [full match, year, department, number]
+      const year = match[1];           // First capturing group
+      const department = match[2];     // Second capturing group
+      const number = match[3];         // Third capturing group
+      const domain = "@charusat.edu.in"; // Domain part
+      
+      // Return the extracted parts in an array
+      return [year, department, number, domain];
+  } else {
+      return null; // Return null if the email format is invalid
+  }
+}
+
+// Mobile Number Validation
+document.getElementById("id").addEventListener("input", function() {
+  const idInput = document.getElementById("id");
+  const idError = document.getElementById("idError");
+  const idPattern = new RegExp(`^(d?\\d{2}(?:${departments.join('|')})\\d{3})`, 'i');
+
+  // Validate id format
+  if (!idPattern.test(idInput.value)) {
+    idError.style.display = "block";
+  } else {
+    idError.style.display = "none";
+  }
+  if (idInput.value.trim() === '') {
+    idError.style.display = "none";
+  }
+});
+document.getElementById("contact").addEventListener("input", function() {
+  const contactInput = document.getElementById("contact");
+  const contactError = document.getElementById("contactError");
+  const mobilePattern = /^[0-9]{10}$/;
+
+  // Remove non-digit characters
+  contactInput.value = contactInput.value.replace(/\D/g, '');
+  // Check length and enforce max length of 10 digits
+  if (contactInput.value.length > 10) {
+    contactInput.value = contactInput.value.slice(0, 10); // Trim to first 10 digits
+  }
+  // Validate the number length
+  if (!mobilePattern.test(contactInput.value)) {
+      contactError.style.display = "block";
+  } else {
+      contactError.style.display = "none";
+  }
+  if (contactInput.value.trim() === '') {
+    contactError.style.display = "none";
+  }
+});
+
+let suggestionAdded=false;
+// Email Validation
+document.getElementById("email").addEventListener("input", function() {
+  const emailInput = document.getElementById("email");
+  const emailError = document.getElementById("emailError");
+
+  // Regex pattern to validate specified formats
+  const emailPattern = new RegExp(`^(d?\\d{2}(?:${departments.join('|')})\\d{3})@charusat\\.edu\\.in$`, 'i');
+
+
+    // Show suggestion if '@' is typed
+    let atIndex = emailInput.value.indexOf('@');
+    if (atIndex !== -1 && emailInput.value.length === atIndex + 1 && !suggestionAdded) {
+        // Add the suggestion only the first time
+        emailInput.value += 'charusat.edu.in'; 
+        suggestionAdded = true; // Set the flag to true after adding
+    }
+    if(atIndex===-1){
+      suggestionAdded=false;
+    }
+  
+  // Validate email format
+  if (!emailPattern.test(emailInput.value)) {
+      emailError.style.display = "block";
+      emailError.textContent = "Invalid email format. Please use the format: YY[dept]XXX@charusat.edu.in OR DYY[dept]XXX@charusat.edu.in";
+    } else {
+      emailError.style.display = "none";
+    }
+    
+    const institute = document.getElementById('institute');
+    const department = document.getElementById('department');
+
+    if (emailInput.value.trim() === '') {
+      emailError.style.display = "none";
+      institute.innerHTML='';
+      institute.innerHTML=`<option value="">SELECT YOUR INSTITUTE</option>
+                            <option value="CSPIT">CSPIT</option>
+                            <option value="DEPSTAR">DEPSTAR</option>`;
+      department.innerHTML='<option value="">SELECT YOUR DEPARTMENT</option>';
+
+    }
+    let data;
+    if (data = extractEmailParts(emailInput.value)) {
+      
+      // Convert data[1] to lower case once for efficiency
+      const departmentCode = data[1].toLowerCase();
+      
+
+      //select institute form email
+      if (departmentCode === 'cs' || departmentCode === 'ce' || departmentCode === 'it') {
+        institute.value = 'CSPIT';
+      } else if (departmentCode === 'dcs' || departmentCode === 'dce' || departmentCode === 'dit') {
+        institute.value = 'DEPSTAR';
+      }
+
+      department.innerHTML = ''; // Clear previous options
+      
+      if (institute.value === 'CSPIT') {
+        const options = ['SELECT YOUR DEPARTMENT','COMPUTER SCIENCE AND ENGINEERING','COMPUTER ENGINEERING', 'INFORMATION TECHNOLOGY'];
+        options.forEach(option => {
+          let opt = document.createElement('option');
+          opt.text = option;
+          department.appendChild(opt);
+        });
+      } else if (institute.value === 'DEPSTAR') {
+        const options = ['SELECT YOUR DEPARTMENT','COMPUTER SCIENCE AND ENGINEERING','COMPUTER ENGINEERING', 'INFORMATION TECHNOLOGY'];
+        options.forEach(option => {
+          let opt = document.createElement('option');
+          opt.text = option;
+          department.appendChild(opt);
+        });
+      }else{
+          const options = ['SELECT YOUR DEPARTMENT'];
+          options.forEach(option => {
+            let opt = document.createElement('option');
+            opt.text = option;
+            department.appendChild(opt);
+          });
+        }
+        
+        
+      //select department form email
+      if (departmentCode.includes('cs')) {
+          department.value = 'COMPUTER SCIENCE AND ENGINEERING';
+      } else if (departmentCode.includes('ce')) {
+          department.value = 'COMPUTER ENGINEERING';
+      } else if (departmentCode.includes('it')) {
+          department.value = 'INFORMATION TECHNOLOGY';
+      }
+  }
+  
+});
+
+
  // Dynamic department list based on selected institute
   document.getElementById('institute').addEventListener('change', function() {
     const department = document.getElementById('department');
     department.innerHTML = ''; // Clear previous options
 
-    if (this.value === 'cspit') {
-      const options = ['Select your department','Computer Science And Engineering','Computer Engineering', 'Information Technology'];
+    if (this.value === 'CSPIT') {
+      const options = ['SELECT YOUR DEPARTMENT','COMPUTER SCIENCE AND ENGINEERING','COMPUTER ENGINEERING', 'INFORMATION TECHNOLOGY'];
       options.forEach(option => {
           let opt = document.createElement('option');
           opt.text = option;
           department.appendChild(opt);
         });
-    } else if (this.value === 'depstar') {
-    const options = ['Select your department','Computer Science And Engineering','Computer Engineering', 'Information Technology'];
+    } else if (this.value === 'DEPSTAR') {
+    const options = ['SELECT YOUR DEPARTMENT','COMPUTER SCIENCE AND ENGINEERING','COMPUTER ENGINEERING', 'INFORMATION TECHNOLOGY'];
       options.forEach(option => {
         let opt = document.createElement('option');
         opt.text = option;
         department.appendChild(opt);
       });
     }else{
-        const options = ['Select your department'];
+        const options = ['SELECT YOUR DEPARTMENT'];
           options.forEach(option => {
             let opt = document.createElement('option');
             opt.text = option;

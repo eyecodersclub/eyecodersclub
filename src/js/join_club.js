@@ -1,5 +1,5 @@
 import {sendRequestForJoinClub} from '../api/join_club.js';
-
+import { getStudentInfo } from '../api/getInfo.js';
 const departments = ['cs', 'ce', 'it', 'dcs', 'dce', 'dit'];
 
 
@@ -23,19 +23,114 @@ function extractEmailParts(email) {
 }
 
 // Mobile Number Validation
-document.getElementById("id").addEventListener("input", function() {
+document.getElementById("id").addEventListener("input", async function() {
   const idInput = document.getElementById("id");
   const idError = document.getElementById("idError");
   const idPattern = new RegExp(`^(d?\\d{2}(?:${departments.join('|')})\\d{3})`, 'i');
-
+  const institute = document.getElementById('institute');
+  const department = document.getElementById('department');
   // Validate id format
   if (!idPattern.test(idInput.value)) {
     idError.style.display = "block";
+    idError.textContent="Invalid Collage Id";
+    institute.innerHTML='';
+    institute.innerHTML=`<option value="">SELECT YOUR INSTITUTE</option>
+                          <option value="CSPIT">CSPIT</option>
+                          <option value="DEPSTAR">DEPSTAR</option>`;
+    department.innerHTML='<option value="">SELECT YOUR DEPARTMENT</option>';
+    semester.value="";
+    institute.value="";
+    department.value="";
   } else {
     idError.style.display = "none";
+    const loadingScreen = document.getElementById('loading-screen');
+    const container=document.getElementById('form-container');
+    loadingScreen.style.display = 'flex';
+    container.style.display='none';
+    
+    const data=await getStudentInfo(idInput.value);
+    console.log(data);
+    if(data){
+      if (data.responseCode === "200") {
+        idError.style.display = "block";
+        idError.textContent=data.studentName;
+        const semester=document.getElementById('semester');
+        semester.value=data.currentSemester;
+
+  
+        let x;
+        if (x = extractEmailParts(idInput.value+"@charusat.edu.in")) {
+          
+          // Convert data[1] to lower case once for efficiency
+          const departmentCode = x[1].toLowerCase();
+          
+    
+          //select institute form email
+          if (departmentCode === 'cs' || departmentCode === 'ce' || departmentCode === 'it') {
+            institute.value = 'CSPIT';
+          } else if (departmentCode === 'dcs' || departmentCode === 'dce' || departmentCode === 'dit') {
+            institute.value = 'DEPSTAR';
+          }
+    
+          department.innerHTML = ''; // Clear previous options
+          
+          if (institute.value === 'CSPIT') {
+            const options = ['SELECT YOUR DEPARTMENT','COMPUTER SCIENCE AND ENGINEERING','COMPUTER ENGINEERING', 'INFORMATION TECHNOLOGY'];
+            options.forEach(option => {
+              let opt = document.createElement('option');
+              opt.text = option;
+              department.appendChild(opt);
+            });
+          } else if (institute.value === 'DEPSTAR') {
+            const options = ['SELECT YOUR DEPARTMENT','COMPUTER SCIENCE AND ENGINEERING','COMPUTER ENGINEERING', 'INFORMATION TECHNOLOGY'];
+            options.forEach(option => {
+              let opt = document.createElement('option');
+              opt.text = option;
+              department.appendChild(opt);
+            });
+          }else{
+              const options = ['SELECT YOUR DEPARTMENT'];
+              options.forEach(option => {
+                let opt = document.createElement('option');
+                opt.text = option;
+                department.appendChild(opt);
+              });
+            }
+            
+            
+          //select department form email
+          if (departmentCode.includes('cs')) {
+              department.value = 'COMPUTER SCIENCE AND ENGINEERING';
+          } else if (departmentCode.includes('ce')) {
+              department.value = 'COMPUTER ENGINEERING';
+          } else if (departmentCode.includes('it')) {
+              department.value = 'INFORMATION TECHNOLOGY';
+          }
+      }
+      loadingScreen.style.display = 'none';
+      container.style.display='block';
+    }else{
+      idError.style.display = "block";
+      idError.textContent=data.error;
+      const semester=document.getElementById('semester');
+      semester.value="";
+      institute.value="";
+      department.value="";
+      document.getElementById("loading1").style.display = "none";
+      document.querySelector("body").classList.remove("blur");
+      }
+    }
   }
   if (idInput.value.trim() === '') {
     idError.style.display = "none";
+    institute.innerHTML='';
+    institute.innerHTML=`<option value="">SELECT YOUR INSTITUTE</option>
+                          <option value="CSPIT">CSPIT</option>
+                          <option value="DEPSTAR">DEPSTAR</option>`;
+    department.innerHTML='<option value="">SELECT YOUR DEPARTMENT</option>';
+    semester.value="";
+    institute.value="";
+    department.value="";
   }
 });
 document.getElementById("contact").addEventListener("input", function() {
@@ -88,68 +183,6 @@ document.getElementById("email").addEventListener("input", function() {
     } else {
       emailError.style.display = "none";
     }
-    
-    const institute = document.getElementById('institute');
-    const department = document.getElementById('department');
-
-    if (emailInput.value.trim() === '') {
-      emailError.style.display = "none";
-      institute.innerHTML='';
-      institute.innerHTML=`<option value="">SELECT YOUR INSTITUTE</option>
-                            <option value="CSPIT">CSPIT</option>
-                            <option value="DEPSTAR">DEPSTAR</option>`;
-      department.innerHTML='<option value="">SELECT YOUR DEPARTMENT</option>';
-
-    }
-    let data;
-    if (data = extractEmailParts(emailInput.value)) {
-      
-      // Convert data[1] to lower case once for efficiency
-      const departmentCode = data[1].toLowerCase();
-      
-
-      //select institute form email
-      if (departmentCode === 'cs' || departmentCode === 'ce' || departmentCode === 'it') {
-        institute.value = 'CSPIT';
-      } else if (departmentCode === 'dcs' || departmentCode === 'dce' || departmentCode === 'dit') {
-        institute.value = 'DEPSTAR';
-      }
-
-      department.innerHTML = ''; // Clear previous options
-      
-      if (institute.value === 'CSPIT') {
-        const options = ['SELECT YOUR DEPARTMENT','COMPUTER SCIENCE AND ENGINEERING','COMPUTER ENGINEERING', 'INFORMATION TECHNOLOGY'];
-        options.forEach(option => {
-          let opt = document.createElement('option');
-          opt.text = option;
-          department.appendChild(opt);
-        });
-      } else if (institute.value === 'DEPSTAR') {
-        const options = ['SELECT YOUR DEPARTMENT','COMPUTER SCIENCE AND ENGINEERING','COMPUTER ENGINEERING', 'INFORMATION TECHNOLOGY'];
-        options.forEach(option => {
-          let opt = document.createElement('option');
-          opt.text = option;
-          department.appendChild(opt);
-        });
-      }else{
-          const options = ['SELECT YOUR DEPARTMENT'];
-          options.forEach(option => {
-            let opt = document.createElement('option');
-            opt.text = option;
-            department.appendChild(opt);
-          });
-        }
-        
-        
-      //select department form email
-      if (departmentCode.includes('cs')) {
-          department.value = 'COMPUTER SCIENCE AND ENGINEERING';
-      } else if (departmentCode.includes('ce')) {
-          department.value = 'COMPUTER ENGINEERING';
-      } else if (departmentCode.includes('it')) {
-          department.value = 'INFORMATION TECHNOLOGY';
-      }
-  }
   
 });
 
@@ -276,3 +309,4 @@ document.getElementById("email").addEventListener("input", function() {
     loadingScreen.style.display = 'none'; // Hide loading screen
 
   });
+  

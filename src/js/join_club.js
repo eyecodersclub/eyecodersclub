@@ -2,6 +2,14 @@ import {sendRequestForJoinClub} from '../api/join_club.js';
 import { getStudentInfo } from '../api/getInfo.js';
 const departments = ['cs', 'ce', 'it', 'dcs', 'dce', 'dit'];
 
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
 
 function extractEmailParts(email) {
   // Define the regex pattern for validation
@@ -29,6 +37,10 @@ document.getElementById("id").addEventListener("input", async function() {
   const idPattern = new RegExp(`^(d?\\d{2}(?:${departments.join('|')})\\d{3})`, 'i');
   const institute = document.getElementById('institute');
   const department = document.getElementById('department');
+  const semester=document.getElementById('semester');
+
+  const email=document.getElementById('email');
+
   // Validate id format
   if (!idPattern.test(idInput.value)) {
     idError.style.display = "block";
@@ -41,13 +53,15 @@ document.getElementById("id").addEventListener("input", async function() {
     semester.value="";
     institute.value="";
     department.value="";
+    email.value="";
+
   } else {
+    sleep(1000);
     idError.style.display = "none";
     const loadingScreen = document.getElementById('loading-screen');
     const container=document.getElementById('form-container');
     loadingScreen.style.display = 'flex';
     container.style.display='none';
-
     const data=await getStudentInfo(idInput.value);
     console.log(data);
     if(data){
@@ -106,7 +120,6 @@ document.getElementById("id").addEventListener("input", async function() {
           } else if (departmentCode.includes('it')) {
               department.value = 'INFORMATION TECHNOLOGY';
           }
-          const email=document.getElementById('email');
           email.value=idInput.value+"@charusat.edu.in";
       }
       loadingScreen.style.display = 'none';
@@ -114,13 +127,16 @@ document.getElementById("id").addEventListener("input", async function() {
     }else{
       idError.style.display = "block";
       idError.textContent=data.error;
-      const semester=document.getElementById('semester');
       semester.value="";
       institute.value="";
       department.value="";
-      document.getElementById("loading1").style.display = "none";
-      document.querySelector("body").classList.remove("blur");
+      email.value="";
+
+      loadingScreen.style.display = 'none';
+      container.style.display='block';
       }
+      loadingScreen.style.display = 'none';
+      container.style.display='block';
     }
   }
   if (idInput.value.trim() === '') {

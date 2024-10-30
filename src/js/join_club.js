@@ -135,9 +135,9 @@ document.getElementById("id").addEventListener("input", async function() {
       loadingScreen.style.display = 'none';
       container.style.display='block';
       }
-      loadingScreen.style.display = 'none';
-      container.style.display='block';
     }
+    loadingScreen.style.display = 'none';
+    container.style.display='block';
   }
   if (idInput.value.trim() === '') {
     idError.style.display = "none";

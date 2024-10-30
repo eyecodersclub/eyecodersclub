@@ -47,7 +47,7 @@ document.getElementById("id").addEventListener("input", async function() {
     const container=document.getElementById('form-container');
     loadingScreen.style.display = 'flex';
     container.style.display='none';
-    
+
     const data=await getStudentInfo(idInput.value);
     console.log(data);
     if(data){
@@ -106,6 +106,8 @@ document.getElementById("id").addEventListener("input", async function() {
           } else if (departmentCode.includes('it')) {
               department.value = 'INFORMATION TECHNOLOGY';
           }
+          const email=document.getElementById('email');
+          email.value=idInput.value+"@charusat.edu.in";
       }
       loadingScreen.style.display = 'none';
       container.style.display='block';

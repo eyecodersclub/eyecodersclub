@@ -1,4 +1,5 @@
 import { fetchEvents } from '../../src/api/event.js';
+import { API_KEY, BASE_URL } from '../../src/js/config.js';
 
 function formatDateTime(dateStr) {
     const date = new Date(dateStr);
@@ -22,8 +23,24 @@ function loadImage(imgElement) {
         };
     });
 }
-
-
+const scriptUrl=`${BASE_URL}/${API_KEY}/exec?action=getMarkdownFromDrive`
+async function fetchMarkdownFromScript(fileId) {
+    try {
+        const response = await fetch(scriptUrl+'&id='+fileId);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const markdown = await response.text();
+        document.getElementById('content').innerHTML = marked.parse(markdown);
+        
+    } catch (error) {
+        console.error('Error fetching the Markdown file:', error);
+    }
+    const loadingScreen = document.getElementById('loading-screen');
+    const content = document.getElementById('content');
+    
+    loadingScreen.style.display = 'none'; // Hide loading screen
+}
 const eventId = new URLSearchParams(window.location.search).get('eventId');
 if  (eventId) {
     try {
@@ -32,31 +49,13 @@ if  (eventId) {
         events.forEach(event => {
             if(event["\"Event Id\""]===eventId){
                 document.getElementById("event_title").innerHTML=event["\"Title\""];
-                document.getElementById("event_description").innerHTML=event["\"Description\""];
-                const imageElement=document.getElementById("event_image");
-                imageElement.src=`https://drive.google.com/thumbnail?id=${event["\"Image ID\""]}&sz=w1000`;
-                imageElement.style.display='none';
-                loadImage(imageElement)
-                .then(()=>{
-                    const container=document.getElementById('animation-container');
-                    container.remove();
-                    container.style.display='none';
-                    imageElement.style.display='block';
-                })
-                .catch(()=>{
-                    
-                });
-                document.getElementById("event_date").textContent = `From: ${formatDateTime(event["\"Start Date\""])} To: ${formatDateTime(event["\"End Date\""])}`;
+                fetchMarkdownFromScript(event["\"Markdown File Id\""]);
                 exitst=true;
             }
         });
         if(!exitst){
             document.getElementById("event_title").innerHTML=`event not exists`;
-        }
-        const loadingScreen = document.getElementById('loading-screen');
-        const content = document.getElementById('content');
-        
-        loadingScreen.style.display = 'none'; // Hide loading screen
+        }   
     } catch (error) {
         console.error('Error loading events:', error);
         document.getElementById("event_title").innerHTML=`event not exists`;

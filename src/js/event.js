@@ -217,7 +217,7 @@ async function loadEvents() {
             };
             
             if(event["\"Show\""]){
-                if((event["\"Show\""].toLowerCase()==='t'||event["\"Show\""].toLowerCase()==="true")&&(event["\"Title\""]!=="" && event["\"Description\""]!=="" && event["\"Image ID\""]!=="" && event["\"Start Date\""]!=="" && event["\"End Date\""]!=="" && event["\"Event Id\""]!=="" )){
+                if((event["\"Show\""].toLowerCase()==='t'||event["\"Show\""].toLowerCase()==="true")&&(event["\"Title\""]!=="" && event["\"Description\""]!=="" && event["\"Image ID\""]!=="" && event["\"Start Date\""]!=="" && event["\"End Date\""]!=="" && event["\"Event Id\""]!=="" && event["\"Markdown File Id\""]!==""  )){
                     // Add the event card to the grid
                     eventGrid.appendChild(eventCard);
                 }

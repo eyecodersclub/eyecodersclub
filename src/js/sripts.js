@@ -2,6 +2,7 @@
   function writeText() {
     const text = "Eye Coders Club";
     const textContainer = document.getElementById('eye_coders_club');
+    if(!textContainer) return;
     let cursorSpan = document.createElement('span');
     cursorSpan.className = 'cursor';
     cursorSpan.textContent = '_';
@@ -25,6 +26,7 @@
   // Function to remove the text with the cursor at the end
   function removeText() {
     const textContainer = document.getElementById('eye_coders_club');
+    if(!textContainer) return;
     const cursorSpan = document.querySelector('.cursor');
     let text = textContainer.textContent;
     let i = text.length;
@@ -51,6 +53,7 @@
   function writeS() {
     const text = texts[currentTextIndex];
     const textContainer = document.getElementById('we_are_text');
+    if(!textContainer) return;
     let cursorSpan = document.createElement('span');
     cursorSpan.className = 'cursor';
     cursorSpan.textContent = ' |';
@@ -74,6 +77,7 @@
   // Function to remove the text with the cursor at the end
   function removeS() {
     const textContainer = document.getElementById('we_are_text');
+    if(!textContainer) return;
     const cursorSpan = document.querySelector('.cursor');
     cursorSpan.textContent = ' |';
     let text = textContainer.textContent;

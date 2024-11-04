@@ -42,7 +42,19 @@ function createTeamMember(member){
 }
 
 function loadTeamMembers(teamData, id) {
-    const teamContainer = document.getElementById(id);
+    let idParts = id.split("-");
+    const mainContainer=document.getElementById("teams");
+    const tempDiv = document.createElement('div');
+    const content=`<div class="container">
+    <section class="team-year" style="text-align: left;">
+      <h2>20${idParts[0]}-20${idParts[1]}</h2>
+      <div class="team-grid" id="team_${id}">
+    </section>
+  </div>
+</div>`;
+    tempDiv.innerHTML=content;
+    mainContainer.appendChild(tempDiv);
+    const teamContainer = document.getElementById("team_"+id);
 
     if (!teamContainer) {
         console.error('Team container not found');
@@ -131,24 +143,26 @@ const styleElement = document.createElement('style');
 styleElement.textContent = styles;
 document.head.appendChild(styleElement);
 
-// // Load team members on page load
-// const json_26_27=await fetchAndLoadTeamMembers("26-27");
-// loadTeamMembers(json_26_27,"team_26-27");
+async function loadAllTeams() {
+    try {
+        // Fetch data for all teams concurrently
+        const [json_24_25] = await Promise.all([
+            fetchAndLoadTeamMembers("24-25")
+        ]);
 
-// // Load team members on page load
-// const json_25_26=await fetchAndLoadTeamMembers("25-26");
-// loadTeamMembers(json_25_26,"team_25-26");
+        // Load team members for each container
+        loadTeamMembers(json_24_25, "24-25");
 
-// Load team members on page load
-const json_24_25=await fetchAndLoadTeamMembers("24-25");
-loadTeamMembers(json_24_25,"team_24-25");
+        // Hide loading screen once all data is loaded
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) loadingScreen.style.display = 'none';
+        
+    } catch (error) {
+        console.error("Error loading team data:", error);
+    }
+}
 
-
-
-// Hide loading screen
-const loadingScreen = document.getElementById('loading-screen');
-loadingScreen.style.display = 'none'; 
-
+await loadAllTeams();
   
   
 function loadLucideLibrary(callback) {

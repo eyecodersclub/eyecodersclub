@@ -1,5 +1,5 @@
 import {sendRequestForJoinClub} from '../api/join_club.js';
-import { getStudentInfo } from '../api/getInfo.js';
+// import { getStudentInfo } from '../api/getInfo.js';
 const departments = ['cs', 'ce', 'it', 'dcs', 'dce', 'dit'];
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -49,21 +49,6 @@ document.getElementById("id").addEventListener("input", async function() {
 
   } else {
     idError.style.display = "none";
-    const loadingScreen = document.getElementById('loading-screen');
-    const container=document.getElementById('form-container');
-    await delay(1000);
-    loadingScreen.style.display = 'flex';
-    container.style.display='none';
-    const data=await getStudentInfo(idInput.value);
-    console.log(data);
-    if(data){
-      if (data.responseCode === "200") {
-        idError.style.display = "block";
-        idError.textContent=data.studentName;
-        const semester=document.getElementById('semester');
-        semester.value=data.currentSemester;
-
-  
         let x;
         if (x = extractEmailParts(idInput.value+"@charusat.edu.in")) {
           
@@ -114,22 +99,6 @@ document.getElementById("id").addEventListener("input", async function() {
           }
           email.value=idInput.value+"@charusat.edu.in";
       }
-      loadingScreen.style.display = 'none';
-      container.style.display='block';
-    }else{
-      idError.style.display = "block";
-      idError.textContent=data.error;
-      semester.value="";
-      institute.value="";
-      department.value="";
-      email.value="";
-
-      loadingScreen.style.display = 'none';
-      container.style.display='block';
-      }
-    }
-    loadingScreen.style.display = 'none';
-    container.style.display='block';
   }
   if (idInput.value.trim() === '') {
     idError.style.display = "none";
